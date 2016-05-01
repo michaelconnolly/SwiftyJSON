@@ -56,7 +56,7 @@ class SequenceTypeTests: XCTestCase {
             XCTAssertEqual(sub, json[index])
             XCTAssertEqual(i, "\(index)")
             array.append(sub.number!)
-            index++
+            index += 1
         }
         XCTAssertEqual(index, 5)
         XCTAssertEqual(array, [1,2.0,3.3,123456789,987654321.123456789])
@@ -72,7 +72,7 @@ class SequenceTypeTests: XCTestCase {
             XCTAssertEqual(sub, json[index])
             XCTAssertEqual(i, "\(index)")
             array.append(sub.bool!)
-            index++
+            index += 1
         }
         XCTAssertEqual(index, 5)
         XCTAssertEqual(array, [true, false, false, true, true])
@@ -88,7 +88,7 @@ class SequenceTypeTests: XCTestCase {
             XCTAssertEqual(sub, json[index])
             XCTAssertEqual(i, "\(index)")
             array.append(sub.string!)
-            index++
+            index += 1
         }
         XCTAssertEqual(index, 3)
         XCTAssertEqual(array, ["aoo","bpp","zoo"])
@@ -104,11 +104,11 @@ class SequenceTypeTests: XCTestCase {
             XCTAssertEqual(sub, json[index])
             XCTAssertEqual(i, "\(index)")
             array.append(sub.object)
-            index++
+            index += 1
         }
         XCTAssertEqual(index, 4)
-        XCTAssertEqual(array[0] as! String, "aoo")
-        XCTAssertEqual(array[2] as! NSNull, NSNull())
+        XCTAssertEqual(array[0] as? String, "aoo")
+        XCTAssertEqual(array[2] as? NSNull, NSNull())
     }
     
     func testArrayAllDictionary() {
@@ -121,7 +121,7 @@ class SequenceTypeTests: XCTestCase {
             XCTAssertEqual(sub, json[index])
             XCTAssertEqual(i, "\(index)")
             array.append(sub.object)
-            index++
+            index += 1
         }
         XCTAssertEqual(index, 3)
         XCTAssertEqual((array[0] as! [String : Int])["1"]!, 1)
@@ -140,7 +140,7 @@ class SequenceTypeTests: XCTestCase {
         for (key, sub) in json {
             XCTAssertEqual(sub, json[key])
             dictionary[key] = sub.number!
-            index++
+            index += 1
         }
         
         XCTAssertEqual(index, 2)
@@ -157,7 +157,7 @@ class SequenceTypeTests: XCTestCase {
         for (key, sub) in json {
             XCTAssertEqual(sub, json[key])
             dictionary[key] = sub.bool!
-            index++
+            index += 1
         }
         
         XCTAssertEqual(index, 5)
@@ -174,7 +174,7 @@ class SequenceTypeTests: XCTestCase {
         for (key, sub) in json {
             XCTAssertEqual(sub, json[key])
             dictionary[key] = sub.string!
-            index++
+            index += 1
         }
         
         XCTAssertEqual(index, 3)
@@ -191,13 +191,13 @@ class SequenceTypeTests: XCTestCase {
         for (key, sub) in json {
             XCTAssertEqual(sub, json[key])
             dictionary[key] = sub.object
-            index++
+            index += 1
         }
         
         XCTAssertEqual(index, 4)
-        XCTAssertEqual(dictionary["a"]! as! String, "aoo")
-        XCTAssertEqual(dictionary["bb"]! as! String, "bpp")
-        XCTAssertEqual(dictionary["null"]! as! NSNull, NSNull())
+        XCTAssertEqual(dictionary["a"]! as? String, "aoo")
+        XCTAssertEqual(dictionary["bb"]! as? String, "bpp")
+        XCTAssertEqual(dictionary["null"]! as? NSNull, NSNull())
     }
     
     func testDictionaryAllArray() {
@@ -210,16 +210,16 @@ class SequenceTypeTests: XCTestCase {
         for (key, sub) in json {
             XCTAssertEqual(sub, json[key])
             dictionary[key] = sub.object
-            index++
+            index += 1
         }
         
         XCTAssertEqual(index, 3)
-        XCTAssertEqual((dictionary["Number"] as! NSArray)[0] as! Int, 1)
-        XCTAssertEqual((dictionary["Number"] as! NSArray)[1] as! Double, 2.123456)
-        XCTAssertEqual((dictionary["String"] as! NSArray)[0] as! String, "aa")
-        XCTAssertEqual((dictionary["Mix"] as! NSArray)[0] as! Bool, true)
-        XCTAssertEqual((dictionary["Mix"] as! NSArray)[1] as! String, "766")
-        XCTAssertEqual((dictionary["Mix"] as! NSArray)[2] as! NSNull, NSNull())
-        XCTAssertEqual((dictionary["Mix"] as! NSArray)[3] as! Double, 655231.9823)
+        XCTAssertEqual((dictionary["Number"] as! NSArray)[0] as? Int, 1)
+        XCTAssertEqual((dictionary["Number"] as! NSArray)[1] as? Double, 2.123456)
+        XCTAssertEqual((dictionary["String"] as! NSArray)[0] as? String, "aa")
+        XCTAssertEqual((dictionary["Mix"] as! NSArray)[0] as? Bool, true)
+        XCTAssertEqual((dictionary["Mix"] as! NSArray)[1] as? String, "766")
+        XCTAssertEqual((dictionary["Mix"] as! NSArray)[2] as? NSNull, NSNull())
+        XCTAssertEqual((dictionary["Mix"] as! NSArray)[3] as? Double, 655231.9823)
     }
 }
